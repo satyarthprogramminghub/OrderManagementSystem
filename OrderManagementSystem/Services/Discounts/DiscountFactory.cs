@@ -14,6 +14,7 @@ namespace OrderManagementSystem.Services.Discounts
                 "Regular" => new RegularDiscount(),
                 "Premium" => new PremiumDiscount(),
                 "Gold" => new GoldDiscount(),
+                "Special" => new SpecialDiscount(),
                 _ => new NoDiscount()
             };
         }
