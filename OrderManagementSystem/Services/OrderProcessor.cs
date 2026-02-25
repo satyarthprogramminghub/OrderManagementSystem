@@ -10,7 +10,7 @@ namespace OrderManagementSystem.Services
     public class OrderProcessor
     {
         private readonly IOrderValidator _validator;
-        private readonly IDiscountCalculator _discountCalculator;
+        private readonly DiscountFactory _discountFactory;
         private readonly IPaymentProcessor _paymentProcessor;
         private readonly IOrderRepository _repository;
         private readonly INotificationService _notificationService;
@@ -18,14 +18,14 @@ namespace OrderManagementSystem.Services
 
         public OrderProcessor(
             IOrderValidator validator,
-            IDiscountCalculator discountCalculator,
+            DiscountFactory discountFactory,
             IPaymentProcessor paymentProcessor,
             IOrderRepository repository,
             INotificationService notificationService,
             ILogger logger)
         {
             _validator = validator;
-            _discountCalculator = discountCalculator;
+            _discountFactory = discountFactory;
             _paymentProcessor = paymentProcessor;
             _repository = repository;
             _notificationService = notificationService;
@@ -36,7 +36,8 @@ namespace OrderManagementSystem.Services
         {
             _validator.Validate(order);
 
-            var discount = _discountCalculator.ApplyDiscount(order);
+            var discountCalculator = _discountFactory.GetStrategy(order.CustomerType!);
+            var discount = discountCalculator.ApplyDiscount(order);
             order.TotalAmount -= discount;
 
             _paymentProcessor.ProcessPayment(order.PaymentMethod!);
