@@ -11,6 +11,8 @@ namespace OrderManagementSystem.Models
         {
             if (order.TotalAmount < 500)
             {
+                //throw new Exception("Special discount cannot be applied to small orders.");
+
                 return 0; // No discount for orders below $500
             }
 

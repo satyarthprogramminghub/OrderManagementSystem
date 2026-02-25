@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OrderManagementSystem.Services.Interfaces;
 
 namespace OrderManagementSystem.Services
 {
-    public class PaymentService
+    public class PaymentService : IPaymentProcessor
     {
         public void ProcessPayment(string method)
         {

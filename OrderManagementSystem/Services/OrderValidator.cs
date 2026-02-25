@@ -1,11 +1,9 @@
 ﻿using OrderManagementSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using OrderManagementSystem.Services.Interfaces;
 
 namespace OrderManagementSystem.Services
 {
-    public class OrderValidator
+    public class OrderValidator : IOrderValidator
     {
         public void Validate(Order order)
         {

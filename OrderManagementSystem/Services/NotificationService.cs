@@ -1,12 +1,14 @@
-﻿using System;
+﻿using OrderManagementSystem.Models;
+using OrderManagementSystem.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OrderManagementSystem.Services
 {
-    public class NotificationService
+    public class NotificationService : INotificationService
     {
-        public void SendEmail()
+        public void SendEmail(Order order)
         {
             Console.WriteLine("Sending email to customer...");
         }
